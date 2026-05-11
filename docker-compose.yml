@@ -30,7 +30,7 @@ services:
     networks:
       - dokploy-network
     volumes:
-      - /root/.hermes:/opt/data
+      - hermes_data:/opt/data
     environment:
       - HERMES_UID=${HERMES_UID:-10000}
       - HERMES_GID=${HERMES_GID:-10000}
@@ -63,7 +63,7 @@ services:
     depends_on:
       - gateway
     volumes:
-      - /root/.hermes:/opt/data
+      - hermes_data:/opt/data
     environment:
       - HERMES_UID=${HERMES_UID:-10000}
       - HERMES_GID=${HERMES_GID:-10000}
@@ -74,3 +74,6 @@ services:
 networks:
   dokploy-network:
     external: true
+
+volumes:
+  hermes_data:
