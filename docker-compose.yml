@@ -30,7 +30,7 @@ services:
     networks:
       - dokploy-network
     volumes:
-      - ~/.hermes:/opt/data
+      - /root/.hermes:/opt/data
     environment:
       - HERMES_UID=${HERMES_UID:-10000}
       - HERMES_GID=${HERMES_GID:-10000}
@@ -63,18 +63,13 @@ services:
     depends_on:
       - gateway
     volumes:
-      - ~/.hermes:/opt/data
+      - /root/.hermes:/opt/data
     environment:
       - HERMES_UID=${HERMES_UID:-10000}
       - HERMES_GID=${HERMES_GID:-10000}
     command: ["dashboard", "--host", "0.0.0.0", "--port", "9119", "--no-open", "--insecure"]
     networks:
       - dokploy-network
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.hermes-dashboard.rule=Host(`hermes-dashboard-72-60-123-50.traefik.me`)"
-      - "traefik.http.services.hermes-dashboard.loadbalancer.server.port=9119"
-      - "traefik.http.routers.hermes-dashboard.entrypoints=web"
 
 networks:
   dokploy-network:
